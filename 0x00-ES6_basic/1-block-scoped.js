@@ -1,8 +1,11 @@
-function taskBlock() {
-  let variable1 = "Initial Value";
-  let variable2 = 42;
-	 if (taskBlock) {
-    let variable1 = "New Value";
-    variable2 = 100;
-	 }
+export default function taskBlock(trueOrFalse) {
+  const task = false;
+  const task2 = true;
+
+  if (trueOrFalse) {
+    let task = true;
+    let task2 = false;
+  }
+
+  return [task, task2];
 }
