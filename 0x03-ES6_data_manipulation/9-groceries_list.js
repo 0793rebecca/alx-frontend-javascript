@@ -1,4 +1,4 @@
-function groceriesList() {
+export default function groceriesList() {
     const groceryMap = new Map([
         ['Apples', 10],
         ['Tomatoes', 10],
