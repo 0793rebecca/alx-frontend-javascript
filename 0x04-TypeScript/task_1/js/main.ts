@@ -1,46 +1,52 @@
-interface Student {
+interface Teacher {
   firstName: string;
   lastName: string;
-  age: number;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
   location: string;
+  [key: string]: any;
 }
 
-// Creating two students
-const student1: Student = {
-  firstName: 'John',
-  lastName: 'Doe',
-  age: 20,
-  location: 'City A',
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  const initial = firstName.charAt(0).toUpperCase();
+  const fullLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+  return `${initial}. ${fullLastName}`;
 };
 
-const student2: Student = {
-  firstName: 'Jane',
-  lastName: 'Doe',
-  age: 22,
-  location: 'City B',
-};
+interface StudentClassConstructor {
+  firstName: string;
+  lastName: string;
+}
 
-// Creating an array named studentsList
-const studentsList: Student[] = [student1, student2];
+// Interface definition for StudentClass
+interface StudentClass {
+  workOnHomework(): string;
+  displayName(): string;
+}
 
-// Rendering a table using Vanilla JavaScript
-const table = document.createElement('table');
-const headerRow = table.insertRow(0);
+// Class definition for StudentClass
+class StudentClass implements StudentClass {
+  private firstName: string;
+  private lastName: string;
 
-// Adding headers
-const firstNameHeader = headerRow.insertCell(0);
-const locationHeader = headerRow.insertCell(1);
-firstNameHeader.textContent = 'First Name';
-locationHeader.textContent = 'Location';
+  constructor({ firstName, lastName }: StudentClassConstructor) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
-// Adding rows for each student
-studentsList.forEach((student, index) => {
-  const row = table.insertRow(index + 1);
-  const firstNameCell = row.insertCell(0);
-  const locationCell = row.insertCell(1);
-  firstNameCell.textContent = student.firstName;
-  locationCell.textContent = student.location;
-});
+  workOnHomework(): string {
+    return 'Currently working';
+  }
 
-// Appending the table to the body
-document.body.appendChild(table);
+  displayName(): string {
+    return this.firstName;
+  }
+}
